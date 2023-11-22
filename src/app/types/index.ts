@@ -5,3 +5,11 @@ export interface SportsResponse {
   start_time: string;
   end_time: string;
 }
+
+export interface SportsCard {
+  id: number;
+  name: string;
+  category: string;
+  startTime: string;
+  endTime: string;
+}

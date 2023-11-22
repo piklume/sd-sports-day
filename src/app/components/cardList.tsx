@@ -1,32 +1,23 @@
-import { SportsResponse } from '../types';
+import { SportsCard as SportsCardType } from '../types';
 import SportsCard from './sportsCard';
 
 interface Props {
-  data: SportsResponse[];
+  data: SportsCardType[];
+  onClick: Function;
+  ctaText: string;
 }
 
-const CardList = ({ data }: Props) => {
+const CardList = ({ data, onClick, ctaText }: Props) => {
   return (
     <div className="mb-32 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-      {data.map((sport) => {
-        const {
-          id,
-          event_name: eventName,
-          event_category: eventCategory,
-          start_time: startTime,
-          end_time: endTime,
-        } = sport;
-
-        return (
-          <SportsCard
-            key={id}
-            name={eventName}
-            category={eventCategory}
-            startTime={startTime}
-            endTime={endTime}
-          />
-        );
-      })}
+      {data.map((sport) => (
+        <SportsCard
+          key={sport.id}
+          card={sport}
+          onClick={onClick}
+          ctaText={ctaText}
+        />
+      ))}
     </div>
   );
 };

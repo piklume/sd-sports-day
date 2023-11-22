@@ -1,8 +1,14 @@
 import getSportsEventData from './api/getSportsEventData';
 import MainContent from './components/mainContent';
-import { SportsResponse } from './types';
+import CardSelectionProvider from './context/cardSelectionContext';
+import { SportsCard } from './types';
 
 export default async function Home() {
-  const data: SportsResponse[] = await getSportsEventData();
-  return <MainContent data={data} />;
+  const sportsEventList: SportsCard[] = await getSportsEventData();
+
+  return (
+    <CardSelectionProvider>
+      <MainContent sportsEventList={sportsEventList} />
+    </CardSelectionProvider>
+  );
 }
