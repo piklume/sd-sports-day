@@ -8,7 +8,11 @@ const SelectedCards = () => {
 
   return (
     <div className="basis-1/2 p-4 rounded-lg border border-neutral-800">
-      <CardList data={selectedCards} onClick={removeFromSelection} ctaText="remove" />
+      <CardList
+        data={selectedCards}
+        onClick={removeFromSelection}
+        ctaText="remove"
+      />
     </div>
   );
 };
