@@ -7,7 +7,7 @@ interface Props {
 
 const CardList = ({ data }: Props) => {
   return (
-    <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+    <div className="mb-32 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
       {data.map((sport) => {
         const {
           id,

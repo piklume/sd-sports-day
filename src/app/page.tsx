@@ -1,6 +1,5 @@
 import getSportsEventData from './api/getSportsEventData';
 import MainContent from './components/mainContent';
-// import SportsCard from './components/sportsCard';
 import { SportsResponse } from './types';
 
 export default async function Home() {
