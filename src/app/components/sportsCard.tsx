@@ -24,7 +24,7 @@ const SportsCard = ({ card, onClick, ctaText }: Props) => {
   return (
     <div
       id={`${id}`}
-      className="flex flex-col gap-2 group rounded-lg border border-neutral-800 px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+      className="flex flex-col justify-between gap-2 group rounded-lg border border-neutral-800 px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
     >
       <h2 className={`mb-1 text-md font-semibold`}>
         {name}

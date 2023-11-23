@@ -1,19 +1,20 @@
 import { useContext } from 'react';
 import CardList from './cardList';
 import { CardSelectionContext } from '../context/cardSelectionContext';
+import CardListWrapper from './cardListWrapper';
 
 const SelectedCards = () => {
   const { selectedCards, removeFromSelection } =
     useContext(CardSelectionContext);
 
   return (
-    <div className="basis-1/2 p-4 rounded-lg border border-neutral-800">
+    <CardListWrapper title="Selected Events">
       <CardList
         data={selectedCards}
         onClick={removeFromSelection}
-        ctaText="remove"
+        ctaText="Remove"
       />
-    </div>
+    </CardListWrapper>
   );
 };
 

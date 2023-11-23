@@ -18,8 +18,8 @@ const MainContent = ({ sportsEventList }: Props) => {
   }, [sportsEventList, setAvailableCards]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex min-h-[44rem] w-full gap-4">
+    <main className="flex min-h-screen flex-col items-center justify-between p-12">
+      <div className="flex min-h-[45rem] h-full w-full gap-4">
         <AvailableCards />
         <SelectedCards />
       </div>

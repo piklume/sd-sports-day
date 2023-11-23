@@ -1,18 +1,19 @@
 import { useContext } from 'react';
 import CardList from './cardList';
 import { CardSelectionContext } from '../context/cardSelectionContext';
+import CardListWrapper from './cardListWrapper';
 
 const AvailableCards = () => {
   const { availableCards, addToSelection } = useContext(CardSelectionContext);
 
   return (
-    <div className="basis-1/2 p-4 rounded-lg border border-neutral-800">
+    <CardListWrapper title="All Events">
       <CardList
         data={availableCards}
         onClick={addToSelection}
-        ctaText="select"
+        ctaText="Select"
       />
-    </div>
+    </CardListWrapper>
   );
 };
 
