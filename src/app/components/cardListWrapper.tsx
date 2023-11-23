@@ -13,7 +13,7 @@ const CardListWrapper = ({ children, title }: Props) => {
           {title}
         </h5>
       </div>
-      <div className="basis-1/2 p-4 rounded-lg border border-neutral-800 min-h-[44rem] ">
+      <div className="basis-1/2 p-4 rounded-lg border border-neutral-800 min-h-[44rem]">
         {children}
       </div>
     </div>
