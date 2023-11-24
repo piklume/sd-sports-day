@@ -18,6 +18,7 @@ interface ContextType {
   setSelectedCards: Dispatch<SetStateAction<SportsCard[]>>;
   addToSelection: (card: SportsCard) => void;
   removeFromSelection: (card: SportsCard) => void;
+  addToSelectionAndLocalStorage: (card: SportsCard) => void;
 }
 
 interface Props {
@@ -33,6 +34,7 @@ export const CardSelectionContext = createContext<ContextType>({
   setSelectedCards: () => {},
   addToSelection: () => {},
   removeFromSelection: () => {},
+  addToSelectionAndLocalStorage: () => {},
 });
 
 const CardSelectionProvider = ({ children }: Props) => {
@@ -53,6 +55,11 @@ const CardSelectionProvider = ({ children }: Props) => {
     removeFromAvailable(card);
   };
 
+  const addToSelectionAndLocalStorage = (card: SportsCard) => {
+    addToSelection(card);
+    localStorage.setItem('selectedEvents', JSON.stringify(selectedCards));
+  };
+
   const removeFromSelection = (card: SportsCard) => {
     const filteredCards = selectedCards.filter((item) => item.id !== card.id);
     setSelectedCards(filteredCards);
@@ -70,6 +77,7 @@ const CardSelectionProvider = ({ children }: Props) => {
         setSelectedCards,
         addToSelection,
         removeFromSelection,
+        addToSelectionAndLocalStorage,
       }}
     >
       {children}
