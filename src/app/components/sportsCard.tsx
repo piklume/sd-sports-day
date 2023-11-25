@@ -9,9 +9,10 @@ interface Props {
   card: SportsCardType;
   onClick: Function;
   ctaText: string;
+  isDisabled?: boolean;
 }
 
-const SportsCard = ({ card, onClick, ctaText }: Props) => {
+const SportsCard = ({ card, onClick, ctaText, isDisabled = false }: Props) => {
   const { id, name, category, startTime, endTime } = card;
 
   const start = getTimeHourFromDateTime(startTime);
@@ -24,7 +25,8 @@ const SportsCard = ({ card, onClick, ctaText }: Props) => {
   return (
     <div
       id={`${id}`}
-      className="flex flex-col justify-between gap-2 group rounded-lg border border-neutral-800 px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100"
+      className={`flex flex-col justify-between gap-2 group rounded-lg border border-neutral-800 px-5 py-4 transition-colors
+      ${isDisabled ? "" : "hover:border-gray-300 hover:bg-gray-100"}`}
     >
       <h2 className={`mb-1 text-md font-semibold`}>
         {name}
@@ -41,6 +43,7 @@ const SportsCard = ({ card, onClick, ctaText }: Props) => {
         onClick={
           onButtonClick as MouseEventHandler<HTMLButtonElement> | undefined
         }
+        isDisabled={isDisabled}
       />
     </div>
   );

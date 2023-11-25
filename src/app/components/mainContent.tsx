@@ -11,8 +11,12 @@ interface Props {
 }
 
 const MainContent = ({ sportsEventList }: Props) => {
-  const { availableCards, selectedCards, setAvailableCards, setSelectedCards } =
-    useContext(CardSelectionContext);
+  const {
+    selectedCards,
+    setAvailableCards,
+    setSelectedCards,
+    setDisableCardSelection,
+  } = useContext(CardSelectionContext);
 
   // hydrate available cards with events list fetched from API
   useEffect(() => {
@@ -40,6 +44,15 @@ const MainContent = ({ sportsEventList }: Props) => {
       }
     }
   }, [sportsEventList, setAvailableCards, setSelectedCards]);
+
+  // toggle disable card selection flag if 3 cards are selected
+  useEffect(() => {
+    if (selectedCards.length === 3) {
+      setDisableCardSelection(true);
+    } else {
+      setDisableCardSelection(false);
+    }
+  }, [selectedCards, setDisableCardSelection]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12">

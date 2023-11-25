@@ -1,11 +1,14 @@
-import { useContext } from 'react';
-import CardList from './cardList';
-import { CardSelectionContext } from '../context/cardSelectionContext';
-import CardListWrapper from './cardListWrapper';
+import { useContext } from "react";
+import CardList from "./cardList";
+import { CardSelectionContext } from "../context/cardSelectionContext";
+import CardListWrapper from "./cardListWrapper";
 
 const AvailableCards = () => {
-  const { availableCards, addToSelectionAndLocalStorage } =
-    useContext(CardSelectionContext);
+  const {
+    availableCards,
+    addToSelectionAndLocalStorage,
+    disableCardSelection,
+  } = useContext(CardSelectionContext);
 
   return (
     <CardListWrapper title="All Events">
@@ -13,6 +16,7 @@ const AvailableCards = () => {
         data={availableCards}
         onClick={addToSelectionAndLocalStorage}
         ctaText="Select"
+        isDisabled={disableCardSelection}
       />
     </CardListWrapper>
   );

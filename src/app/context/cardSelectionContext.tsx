@@ -20,6 +20,8 @@ interface ContextType {
   addToSelection: (card: SportsCard) => void;
   removeFromSelection: (card: SportsCard) => void;
   addToSelectionAndLocalStorage: (card: SportsCard) => void;
+  disableCardSelection: boolean;
+  setDisableCardSelection: Dispatch<SetStateAction<boolean>>;
 }
 
 interface Props {
@@ -36,11 +38,15 @@ export const CardSelectionContext = createContext<ContextType>({
   addToSelection: () => {},
   removeFromSelection: () => {},
   addToSelectionAndLocalStorage: () => {},
+  disableCardSelection: false,
+  setDisableCardSelection: () => {},
 });
 
 const CardSelectionProvider = ({ children }: Props) => {
   const [selectedCards, setSelectedCards] = useState<SportsCard[]>([]);
   const [availableCards, setAvailableCards] = useState<SportsCard[]>([]);
+  const [disableCardSelection, setDisableCardSelection] =
+    useState<boolean>(false);
 
   const addToAvailable = (card: SportsCard) => {
     setAvailableCards((prev) => [...prev, card]);
@@ -84,6 +90,8 @@ const CardSelectionProvider = ({ children }: Props) => {
         addToSelection,
         removeFromSelection,
         addToSelectionAndLocalStorage,
+        disableCardSelection,
+        setDisableCardSelection,
       }}
     >
       {children}
