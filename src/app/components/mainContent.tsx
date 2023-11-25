@@ -21,28 +21,25 @@ const MainContent = ({ sportsEventList }: Props) => {
 
   // re-hydrate application from localStorage
   useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      window.localStorage &&
-      selectedCards.length === 0 &&
-      availableCards.length > 0
-    ) {
+    if (typeof window !== "undefined" && window.localStorage) {
       let selectedCardsLocal = JSON.parse(
         localStorage.getItem("selectedEvents")!
       );
 
-      const filteredAvailableCards = availableCards.filter(
-        (availableCard: SportsCard) => {
-          return !selectedCardsLocal.some(
-            (selectedCard: SportsCard) => selectedCard.id === availableCard.id
-          );
-        }
-      );
+      if (selectedCardsLocal.length > 0) {
+        const filteredAvailableCards = sportsEventList.filter(
+          (availableCard: SportsCard) => {
+            return !selectedCardsLocal.some(
+              (selectedCard: SportsCard) => selectedCard.id === availableCard.id
+            );
+          }
+        );
 
-      setAvailableCards(filteredAvailableCards);
-      setSelectedCards(selectedCardsLocal);
+        setAvailableCards(filteredAvailableCards);
+        setSelectedCards(selectedCardsLocal);
+      }
     }
-  }, [availableCards, selectedCards, setAvailableCards, setSelectedCards]);
+  }, [sportsEventList, setAvailableCards, setSelectedCards]);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12">
