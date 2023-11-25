@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Dispatch,
@@ -6,8 +6,9 @@ import {
   SetStateAction,
   createContext,
   useState,
-} from 'react';
-import { SportsCard } from '../types';
+} from "react";
+import { SportsCard } from "../types";
+import { setSelectedEventsToLocalStorage } from "../utils";
 
 interface ContextType {
   availableCards: SportsCard[];
@@ -56,13 +57,18 @@ const CardSelectionProvider = ({ children }: Props) => {
   };
 
   const addToSelectionAndLocalStorage = (card: SportsCard) => {
-    addToSelection(card);
-    localStorage.setItem('selectedEvents', JSON.stringify(selectedCards));
+    setSelectedCards((prev) => {
+      const newSelectedCards = [...prev, card];
+      setSelectedEventsToLocalStorage(newSelectedCards);
+      return newSelectedCards;
+    });
+    removeFromAvailable(card);
   };
 
   const removeFromSelection = (card: SportsCard) => {
     const filteredCards = selectedCards.filter((item) => item.id !== card.id);
     setSelectedCards(filteredCards);
+    setSelectedEventsToLocalStorage(filteredCards);
     addToAvailable(card);
   };
 
