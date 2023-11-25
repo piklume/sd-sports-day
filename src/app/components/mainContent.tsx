@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useContext, useEffect } from 'react';
-import { SportsCard } from '../types';
-import { CardSelectionContext } from '../context/cardSelectionContext';
-import AvailableCards from './availableCards';
-import SelectedCards from './selectedCards';
+import { useContext, useEffect } from "react";
+import { SportsCard } from "../types";
+import { CardSelectionContext } from "../context/cardSelectionContext";
+import AvailableCards from "./availableCards";
+import SelectedCards from "./selectedCards";
 
 interface Props {
   sportsEventList: SportsCard[];
