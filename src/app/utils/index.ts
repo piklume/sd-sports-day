@@ -8,10 +8,10 @@ export const getTimeHourFromDateTime = (dateString: string) =>
 export const setSelectedEventsToLocalStorage = (events: SportsCard[]) =>
   localStorage.setItem("selectedEvents", JSON.stringify(events));
 
-export const isIncomingEventValid = (
+export const validateIncomingEventSelection = (
   existingEvents: SportsCard[],
   incomingEvent: SportsCard
-) => {
+): { result: boolean; message: string } => {
   const startTimeIncoming = new Date(incomingEvent.startTime).getTime();
   const endTimeIncoming = new Date(incomingEvent.endTime).getTime();
 
@@ -37,14 +37,17 @@ export const isIncomingEventValid = (
         endTimeIncoming <= endTimeExisting)
     ) {
       // Overlapping events found
-      console.log(
-        `Overlap found between incoming event ${incomingEvent.name} and existing event ${existingEvent.name}`
-      );
-      return false;
+      const message = `Cannot select ${incomingEvent.name}. Overlap found between existing event ${existingEvent.name}.`;
+      console.log(message);
+      const result = false;
+      return { result, message };
     }
   }
 
   // No overlapping events found
-  console.log("No overlapping events found for the incoming event");
-  return true;
+  const message = `Selected event ${incomingEvent.name}`;
+  console.log(message);
+  const result = true;
+
+  return { result, message };
 };

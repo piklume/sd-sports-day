@@ -10,7 +10,7 @@ import {
 } from "react";
 import { NotificationTypes, SportsCard } from "../types";
 import {
-  isIncomingEventValid,
+  validateIncomingEventSelection,
   setSelectedEventsToLocalStorage,
 } from "../utils";
 import { NotificationContext } from "./notificationContext";
@@ -63,7 +63,11 @@ const CardSelectionProvider = ({ children }: Props) => {
   };
 
   const addToSelection = (card: SportsCard) => {
-    if (isIncomingEventValid(selectedCards, card)) {
+    const { result, message } = validateIncomingEventSelection(
+      selectedCards,
+      card
+    );
+    if (result) {
       setSelectedCards((prev) => {
         const newSelectedCards = [...prev, card];
         setSelectedEventsToLocalStorage(newSelectedCards);
@@ -73,7 +77,7 @@ const CardSelectionProvider = ({ children }: Props) => {
     } else {
       notify({
         type: NotificationTypes.TOAST,
-        message: "Cannot add event, overlaping event exists",
+        message,
         show: true,
         isDismissable: true,
       });
