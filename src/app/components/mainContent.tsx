@@ -31,7 +31,7 @@ const MainContent = ({ sportsEventList }: Props) => {
         localStorage.getItem("selectedEvents")!
       );
 
-      if (selectedCardsLocal.length > 0) {
+      if (selectedCardsLocal?.length > 0) {
         const filteredAvailableCards = sportsEventList.filter(
           (availableCard: SportsCard) => {
             return !selectedCardsLocal.some(
