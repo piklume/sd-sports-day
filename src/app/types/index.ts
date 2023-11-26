@@ -23,4 +23,5 @@ export interface Notifications {
   message: string;
   show: boolean;
   isDismissable?: boolean;
+  duration?: number;
 }

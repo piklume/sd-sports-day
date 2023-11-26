@@ -12,11 +12,12 @@ interface Props {
   children: ReactNode;
 }
 
-const initialValue = {
+const initialValue: Notifications = {
   type: NotificationTypes.TOAST,
   message: "",
   isDismissable: true,
   show: false,
+  duration: 5000,
 };
 
 export const NotificationContext = createContext<ContextType>({

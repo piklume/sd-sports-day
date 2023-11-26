@@ -1,15 +1,35 @@
-import { useContext } from "react";
+import {
+  MutableRefObject,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { NotificationContext } from "../context/notificationContext";
 import { NotificationTypes } from "../types";
 
 const Toast = () => {
   const { notification, notify } = useContext(NotificationContext);
+  const { type, message, show, isDismissable, duration = 5000 } = notification;
 
-  const { type, message, show, isDismissable } = notification;
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
-  const showToast = type === NotificationTypes.TOAST && show;
+  const showToast = useMemo(
+    () => type === NotificationTypes.TOAST && show,
+    [type, show]
+  );
 
-  const closeToast = () => notify({ show: false });
+  const closeToast = useCallback(() => {
+    notify({ show: false });
+    clearTimeout(timeoutRef.current); // clear timeout case when called from dismiss button
+  }, [notify]);
+
+  useEffect(() => {
+    if (showToast) {
+      timeoutRef.current = setTimeout(() => closeToast(), duration);
+    }
+  }, [closeToast, showToast, duration]);
 
   return (
     <>
