@@ -8,7 +8,10 @@ import {
   useState,
 } from "react";
 import { SportsCard } from "../types";
-import { setSelectedEventsToLocalStorage } from "../utils";
+import {
+  isIncomingEventValid,
+  setSelectedEventsToLocalStorage,
+} from "../utils";
 
 interface ContextType {
   availableCards: SportsCard[];
@@ -19,7 +22,6 @@ interface ContextType {
   setSelectedCards: Dispatch<SetStateAction<SportsCard[]>>;
   addToSelection: (card: SportsCard) => void;
   removeFromSelection: (card: SportsCard) => void;
-  addToSelectionAndLocalStorage: (card: SportsCard) => void;
   disableCardSelection: boolean;
   setDisableCardSelection: Dispatch<SetStateAction<boolean>>;
 }
@@ -37,7 +39,6 @@ export const CardSelectionContext = createContext<ContextType>({
   setSelectedCards: () => {},
   addToSelection: () => {},
   removeFromSelection: () => {},
-  addToSelectionAndLocalStorage: () => {},
   disableCardSelection: false,
   setDisableCardSelection: () => {},
 });
@@ -58,17 +59,14 @@ const CardSelectionProvider = ({ children }: Props) => {
   };
 
   const addToSelection = (card: SportsCard) => {
-    setSelectedCards((prev) => [...prev, card]);
-    removeFromAvailable(card);
-  };
-
-  const addToSelectionAndLocalStorage = (card: SportsCard) => {
-    setSelectedCards((prev) => {
-      const newSelectedCards = [...prev, card];
-      setSelectedEventsToLocalStorage(newSelectedCards);
-      return newSelectedCards;
-    });
-    removeFromAvailable(card);
+    if (isIncomingEventValid(selectedCards, card)) {
+      setSelectedCards((prev) => {
+        const newSelectedCards = [...prev, card];
+        setSelectedEventsToLocalStorage(newSelectedCards);
+        return newSelectedCards;
+      });
+      removeFromAvailable(card);
+    }
   };
 
   const removeFromSelection = (card: SportsCard) => {
@@ -89,7 +87,6 @@ const CardSelectionProvider = ({ children }: Props) => {
         setSelectedCards,
         addToSelection,
         removeFromSelection,
-        addToSelectionAndLocalStorage,
         disableCardSelection,
         setDisableCardSelection,
       }}
