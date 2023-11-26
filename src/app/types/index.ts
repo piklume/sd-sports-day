@@ -13,3 +13,14 @@ export interface SportsCard {
   startTime: string;
   endTime: string;
 }
+
+export enum NotificationTypes {
+  TOAST = "TOAST",
+}
+
+export interface Notifications {
+  type: NotificationTypes;
+  message: string;
+  show: boolean;
+  isDismissable?: boolean;
+}

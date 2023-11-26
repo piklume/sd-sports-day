@@ -5,6 +5,7 @@ import { SportsCard } from "../types";
 import { CardSelectionContext } from "../context/cardSelectionContext";
 import AvailableCards from "./availableCards";
 import SelectedCards from "./selectedCards";
+import Toast from "./toast";
 
 interface Props {
   sportsEventList: SportsCard[];
@@ -56,6 +57,7 @@ const MainContent = ({ sportsEventList }: Props) => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-12">
+      <Toast />
       <div className="flex min-h-[45rem] h-full w-full gap-4">
         <AvailableCards />
         <SelectedCards />

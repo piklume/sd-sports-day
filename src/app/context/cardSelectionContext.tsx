@@ -5,13 +5,15 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useContext,
   useState,
 } from "react";
-import { SportsCard } from "../types";
+import { NotificationTypes, SportsCard } from "../types";
 import {
   isIncomingEventValid,
   setSelectedEventsToLocalStorage,
 } from "../utils";
+import { NotificationContext } from "./notificationContext";
 
 interface ContextType {
   availableCards: SportsCard[];
@@ -49,6 +51,8 @@ const CardSelectionProvider = ({ children }: Props) => {
   const [disableCardSelection, setDisableCardSelection] =
     useState<boolean>(false);
 
+  const { notify } = useContext(NotificationContext);
+
   const addToAvailable = (card: SportsCard) => {
     setAvailableCards((prev) => [...prev, card]);
   };
@@ -66,6 +70,13 @@ const CardSelectionProvider = ({ children }: Props) => {
         return newSelectedCards;
       });
       removeFromAvailable(card);
+    } else {
+      notify({
+        type: NotificationTypes.TOAST,
+        message: "Cannot add event, overlaping event exists",
+        show: true,
+        isDismissable: true,
+      });
     }
   };
 
