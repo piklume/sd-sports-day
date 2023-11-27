@@ -34,7 +34,6 @@ describe("Sports Card", () => {
   });
 
   test("Should disable cta onclick when is disabled is true", async () => {
-    const user = userEvent.setup();
     render(<SportsCard {...mockProps} isDisabled={true} />);
     const cta = screen.getByRole("button", { name: /Select/ });
     expect(cta).toBeDisabled();

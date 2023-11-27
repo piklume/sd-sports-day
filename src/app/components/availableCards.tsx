@@ -6,13 +6,13 @@ import CardListWrapper from "./cardListWrapper";
 import { CardSelectionContext } from "../context/cardSelectionContext";
 
 const AvailableCards = () => {
-  const { availableCards, addToSelection, disableCardSelection } =
+  const { getAvailableCards, addToSelection, disableCardSelection } =
     useContext(CardSelectionContext);
 
   return (
     <CardListWrapper title="All Events">
       <CardList
-        data={availableCards}
+        data={getAvailableCards}
         onClick={addToSelection}
         ctaText="Select"
         isDisabled={disableCardSelection}

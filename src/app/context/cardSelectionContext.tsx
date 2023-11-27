@@ -7,6 +7,7 @@ import {
   createContext,
   useContext,
   useState,
+  useMemo,
 } from "react";
 
 import { NotificationContext } from "./notificationContext";
@@ -27,6 +28,8 @@ interface ContextType {
   removeFromSelection: (card: SportsCard) => void;
   disableCardSelection: boolean;
   setDisableCardSelection: Dispatch<SetStateAction<boolean>>;
+  getAvailableCards: SportsCard[];
+  getSelectedCards: SportsCard[];
 }
 
 interface Props {
@@ -44,6 +47,8 @@ export const CardSelectionContext = createContext<ContextType>({
   removeFromSelection: () => {},
   disableCardSelection: false,
   setDisableCardSelection: () => {},
+  getAvailableCards: [],
+  getSelectedCards: [],
 });
 
 const CardSelectionProvider = ({ children }: Props) => {
@@ -92,6 +97,22 @@ const CardSelectionProvider = ({ children }: Props) => {
     addToAvailable(card);
   };
 
+  const getAvailableCards = useMemo(() => {
+    const cards = [...availableCards];
+    const sortedCards = cards.sort((a, b) =>
+      a.category.localeCompare(b.category)
+    );
+    return sortedCards;
+  }, [availableCards]);
+
+  const getSelectedCards = useMemo(() => {
+    const cards = [...selectedCards];
+    const sortedCards = cards.sort((a, b) =>
+      a.category.localeCompare(b.category)
+    );
+    return sortedCards;
+  }, [selectedCards]);
+
   return (
     <CardSelectionContext.Provider
       value={{
@@ -105,6 +126,8 @@ const CardSelectionProvider = ({ children }: Props) => {
         removeFromSelection,
         disableCardSelection,
         setDisableCardSelection,
+        getAvailableCards,
+        getSelectedCards,
       }}
     >
       {children}

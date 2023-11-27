@@ -9,11 +9,13 @@ export default async function Home() {
   const sportsEventList: SportsCard[] = await getSportsEventData();
 
   return (
-    <NotificationProvider>
-      <CardSelectionProvider>
-        <Header />
-        <MainContent sportsEventList={sportsEventList} />
-      </CardSelectionProvider>
-    </NotificationProvider>
+    <>
+      <Header />
+      <NotificationProvider>
+        <CardSelectionProvider>
+          <MainContent sportsEventList={sportsEventList} />
+        </CardSelectionProvider>
+      </NotificationProvider>
+    </>
   );
 }

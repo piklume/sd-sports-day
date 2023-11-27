@@ -5,13 +5,13 @@ import CardListWrapper from "./cardListWrapper";
 import { CardSelectionContext } from "../context/cardSelectionContext";
 
 const SelectedCards = () => {
-  const { selectedCards, removeFromSelection } =
+  const { getSelectedCards, removeFromSelection } =
     useContext(CardSelectionContext);
 
   return (
     <CardListWrapper title="Selected Events">
       <CardList
-        data={selectedCards}
+        data={getSelectedCards}
         onClick={removeFromSelection}
         ctaText="Remove"
       />
