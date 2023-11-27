@@ -1,11 +1,5 @@
-import {
-  MutableRefObject,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import { useCallback, useContext, useEffect, useMemo, useRef } from "react";
+
 import { NotificationContext } from "../context/notificationContext";
 import { NotificationTypes } from "../types";
 

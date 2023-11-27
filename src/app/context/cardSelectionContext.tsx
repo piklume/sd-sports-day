@@ -8,12 +8,13 @@ import {
   useContext,
   useState,
 } from "react";
+
+import { NotificationContext } from "./notificationContext";
 import { NotificationTypes, SportsCard } from "../types";
 import {
   validateIncomingEventSelection,
   setSelectedEventsToLocalStorage,
 } from "../utils";
-import { NotificationContext } from "./notificationContext";
 
 interface ContextType {
   availableCards: SportsCard[];

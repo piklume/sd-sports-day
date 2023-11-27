@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, createContext, useState } from "react";
+
 import { NotificationTypes, Notifications } from "../types";
 
 interface ContextType {

@@ -1,9 +1,10 @@
 "use client";
 
 import { MouseEventHandler } from "react";
+
+import Button from "./button";
 import { SportsCard as SportsCardType } from "../types";
 import { getTimeHourFromDateTime } from "../utils";
-import Button from "./button";
 
 interface Props {
   card: SportsCardType;

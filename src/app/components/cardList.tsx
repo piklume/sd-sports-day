@@ -1,5 +1,5 @@
-import { SportsCard as SportsCardType } from "../types";
 import SportsCard from "./sportsCard";
+import { SportsCard as SportsCardType } from "../types";
 
 interface Props {
   data: SportsCardType[];
